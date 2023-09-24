@@ -1,0 +1,25 @@
+<launch>
+	<!-- drivebase config args -->
+	<arg name="motor_cmd_topic" default="/motor_cmd"/>
+	<arg name="cmd_vel_topic" default="/cmd_vel"/>
+	<arg name="timeout" default="0.5"/>
+
+	<!-- cmd_vel range args -->
+	<arg name="min_linear_speed" default="-2"/>
+	<arg name="max_linear_speed" default="2"/>
+	<arg name="min_angular_speed" default="-2"/>
+	<arg name="max_angular_speed" default="2"/>
+
+	<!-- This node converts cmd_vel msgs to motor_cmd messages -->
+	<node pkg="skid_steer_drivebase" name="drivebase_interfacer"
+	type="drivebase_interfacing.py" output="screen" respawn="false">
+		<param name="motor_cmd_topic" value="$(arg motor_cmd_topic)"/>
+		<param name="cmd_vel_topic" value="$(arg cmd_vel_topic)"/>
+		<param name="timeout" value="$(arg timeout)"/>
+
+		<param name="min_linear_speed" value="$(arg min_linear_speed)"/>
+		<param name="max_linear_speed" value="$(arg max_linear_speed)"/>
+		<param name="min_angular_speed" value="$(arg min_angular_speed)"/>
+		<param name="max_angular_speed" value="$(arg max_angular_speed)"/>
+	</node>
+</launch>
